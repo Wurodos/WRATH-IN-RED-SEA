@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c07wkb1j20lhq"]
+
+[ext_resource type="Texture2D" uid="uid://b02hhjo3gasjj" path="res://icon/event_reminders/zone_of_peace.jpg" id="1_6remv"]
+
+[node name="EventIcon" type="TextureRect"]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = -1
+anchor_right = 0.044
+anchor_bottom = 0.079
+offset_right = -50.688
+offset_bottom = -51.192
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_6remv")
+expand_mode = 1

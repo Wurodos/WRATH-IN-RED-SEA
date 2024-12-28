@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://dv1uoy45dvk41"]
+
+[ext_resource type="Texture2D" uid="uid://qisvpnek78cg" path="res://sprite/card.png" id="1_nx4mc"]
+[ext_resource type="Texture2D" uid="uid://cd631secl66at" path="res://sprite/dragged.png" id="1_ufj4h"]
+[ext_resource type="Script" path="res://scripts/card_ui.gd" id="2_yf26r"]
+[ext_resource type="Texture2D" uid="uid://cvht68kwvw8u7" path="res://sprite/star_neutral.png" id="3_pxwr4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bdu1x"]
+line_spacing = 0.2
+font_size = 12
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_aeeys"]
+line_spacing = 0.001
+font_size = 10
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dlc3f"]
+font_size = 240
+outline_size = 100
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4prwg"]
+size = Vector2(171, 57.2864)
+
+[node name="Card" type="TextureRect"]
+anchors_preset = -1
+anchor_right = 0.143
+anchor_bottom = 0.309
+offset_right = -164.736
+offset_bottom = -200.232
+texture = ExtResource("1_ufj4h")
+
+[node name="Card" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(82, 100.5)
+scale = Vector2(1, 0.995)
+texture = ExtResource("1_nx4mc")
+script = ExtResource("2_yf26r")
+
+[node name="Button" type="Button" parent="Card"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -84.0
+offset_top = -100.0
+offset_right = 81.0
+offset_bottom = 100.0
+
+[node name="Name" type="Label" parent="Card"]
+offset_left = -50.0
+offset_top = -93.0
+offset_right = 85.0
+offset_bottom = -42.0
+text = "Румыно-эфиопская война за независимость"
+label_settings = SubResource("LabelSettings_bdu1x")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+language = "ru"
+
+[node name="Desc" type="Label" parent="Card"]
+offset_left = -75.0
+offset_top = -7.0
+offset_right = 76.0
+offset_bottom = 99.0
+text = "Draw the next card. If actions > 3, die"
+label_settings = SubResource("LabelSettings_aeeys")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Star" type="Sprite2D" parent="Card"]
+position = Vector2(-63, -77)
+scale = Vector2(0.0683594, 0.0683594)
+texture = ExtResource("3_pxwr4")
+
+[node name="Operations" type="Label" parent="Card/Star"]
+offset_left = -248.686
+offset_top = -277.943
+offset_right = 263.314
+offset_bottom = 278.057
+text = "4"
+label_settings = SubResource("LabelSettings_dlc3f")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="Card"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Card/Area2D"]
+position = Vector2(0.5, -8.0402)
+shape = SubResource("RectangleShape2D_4prwg")
+
+[connection signal="button_down" from="Card/Button" to="Card" method="_on_button_button_down"]
+[connection signal="button_up" from="Card/Button" to="Card" method="_on_button_button_up"]

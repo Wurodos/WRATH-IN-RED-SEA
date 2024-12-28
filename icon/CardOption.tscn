@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8btckt6ykjql"]
+
+[ext_resource type="Texture2D" uid="uid://d1lilnn40l2ts" path="res://icon.svg" id="1_03ng6"]
+[ext_resource type="Script" path="res://icon/card_option.gd" id="2_at370"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sbqa"]
+size = Vector2(129, 128)
+
+[node name="CardOption" type="TextureRect"]
+custom_minimum_size = Vector2(120, 120)
+anchors_preset = -1
+anchor_right = 0.113
+anchor_bottom = 0.193
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("1_03ng6")
+expand_mode = 1
+script = ExtResource("2_at370")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 1)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(64.5, 63)
+shape = SubResource("RectangleShape2D_8sbqa")
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 130.0
+offset_bottom = 130.0
+disabled = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

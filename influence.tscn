@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh5onys8v1u74"]
+
+[ext_resource type="Texture2D" uid="uid://crt85bxv1un0p" path="res://sprite/influence_sov/inf_uncontrol.png" id="1_j15if"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6qa86"]
+font_size = 200
+outline_size = 30
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D"]
+texture = ExtResource("1_j15if")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -126.0
+offset_top = -18.0
+offset_right = 133.0
+offset_bottom = 255.0
+label_settings = SubResource("LabelSettings_6qa86")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,230 @@
+[gd_scene load_steps=16 format=3 uid="uid://ccarxj20ight3"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_kdpav"]
+[ext_resource type="Texture2D" uid="uid://qisvpnek78cg" path="res://sprite/card.png" id="1_p5sm8"]
+[ext_resource type="Texture2D" uid="uid://diwr8w4duxwp2" path="res://sprite/pic6596694.jpg" id="2_6foa3"]
+[ext_resource type="Script" path="res://scripts/map_ui.gd" id="2_mkb0c"]
+[ext_resource type="Script" path="res://scripts/card.gd" id="4_sskqe"]
+[ext_resource type="Texture2D" uid="uid://1kip364jafvp" path="res://sprite/star_usa.png" id="6_k5k8i"]
+[ext_resource type="Texture2D" uid="uid://c3vdrl7xyy4vi" path="res://sprite/defcon.png" id="6_ouju7"]
+[ext_resource type="Texture2D" uid="uid://bvs0m30shn3yv" path="res://sprite/star_soviet.png" id="7_hyjwb"]
+[ext_resource type="Script" path="res://scripts/map.gd" id="9_o2pbp"]
+[ext_resource type="PackedScene" uid="uid://065j2k385rk" path="res://country.tscn" id="10_85ooe"]
+[ext_resource type="Texture2D" uid="uid://snhsrc703ni0" path="res://sprite/round.png" id="10_netuo"]
+[ext_resource type="Texture2D" uid="uid://bgwuw6xndkcg8" path="res://sprite/turn.png" id="11_r5sb0"]
+[ext_resource type="Script" path="res://scripts/hand.gd" id="13_ucays"]
+[ext_resource type="LabelSettings" uid="uid://dibd8loqybvbu" path="res://text/standard.tres" id="13_ylyrt"]
+[ext_resource type="Texture2D" uid="uid://dj2nbw28cvex3" path="res://sprite/dice/1.png" id="14_vfij2"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_kdpav")
+
+[node name="Map" type="Sprite2D" parent="."]
+self_modulate = Color(0.758192, 0.758192, 0.758192, 1)
+position = Vector2(707.535, 475.5)
+scale = Vector2(1.4233, 1.4233)
+texture = ExtResource("2_6foa3")
+script = ExtResource("2_mkb0c")
+
+[node name="Countries" type="Node" parent="Map"]
+
+[node name="egypt" parent="Map/Countries" instance=ExtResource("10_85ooe")]
+position = Vector2(474, 182)
+scale = Vector2(2.4, 2.4)
+
+[node name="sudan" parent="Map/Countries" instance=ExtResource("10_85ooe")]
+position = Vector2(506, 343)
+scale = Vector2(2.4, 2.4)
+
+[node name="ethiopia" parent="Map/Countries" instance=ExtResource("10_85ooe")]
+position = Vector2(565, 521)
+scale = Vector2(2.4, 2.4)
+
+[node name="djibouti" parent="Map/Countries" instance=ExtResource("10_85ooe")]
+position = Vector2(737, 468)
+scale = Vector2(2.4, 2.4)
+
+[node name="somalia" parent="Map/Countries" instance=ExtResource("10_85ooe")]
+position = Vector2(783, 592)
+scale = Vector2(2.4, 2.4)
+
+[node name="kenya" parent="Map/Countries" instance=ExtResource("10_85ooe")]
+position = Vector2(600, 655)
+scale = Vector2(2.4, 2.4)
+
+[node name="madagascar" parent="Map/Countries" instance=ExtResource("10_85ooe")]
+position = Vector2(771, 881)
+scale = Vector2(2.4, 2.4)
+
+[node name="saudi_arabia" parent="Map/Countries" instance=ExtResource("10_85ooe")]
+position = Vector2(715, 202)
+scale = Vector2(2.4, 2.4)
+
+[node name="s_yemen" parent="Map/Countries" instance=ExtResource("10_85ooe")]
+position = Vector2(741, 370)
+scale = Vector2(2.4, 2.4)
+
+[node name="yemen" parent="Map/Countries" instance=ExtResource("10_85ooe")]
+position = Vector2(813, 300)
+scale = Vector2(2.4, 2.4)
+
+[node name="oman" parent="Map/Countries" instance=ExtResource("10_85ooe")]
+position = Vector2(976, 276)
+scale = Vector2(2.4, 2.4)
+
+[node name="SSL" parent="Map/Countries" instance=ExtResource("10_85ooe")]
+position = Vector2(604, 251)
+scale = Vector2(2.4, 2.4)
+
+[node name="Round" type="Sprite2D" parent="Map"]
+position = Vector2(-218.882, -280.686)
+scale = Vector2(0.0555762, 0.0555762)
+texture = ExtResource("10_netuo")
+
+[node name="VP" type="Sprite2D" parent="Map"]
+position = Vector2(-217.477, 255.392)
+scale = Vector2(0.0720432, 0.0720432)
+texture = ExtResource("6_k5k8i")
+
+[node name="MO_USA" type="Sprite2D" parent="Map"]
+position = Vector2(-220.99, 299.656)
+scale = Vector2(0.0576345, 0.0576345)
+texture = ExtResource("6_k5k8i")
+
+[node name="MO_USSR" type="Sprite2D" parent="Map"]
+position = Vector2(-220.287, 312.302)
+scale = Vector2(0.0555762, 0.0555762)
+texture = ExtResource("7_hyjwb")
+
+[node name="space_USA" type="Sprite2D" parent="Map"]
+position = Vector2(180.893, 278)
+scale = Vector2(0.0576345, 0.0576345)
+texture = ExtResource("6_k5k8i")
+
+[node name="space_USSR" type="Sprite2D" parent="Map"]
+position = Vector2(202.673, 287.009)
+scale = Vector2(0.0555762, 0.0555762)
+texture = ExtResource("7_hyjwb")
+
+[node name="Defcon" type="Sprite2D" parent="Map"]
+position = Vector2(110, -225.884)
+scale = Vector2(0.0487148, 0.0487148)
+texture = ExtResource("6_ouju7")
+
+[node name="Turn" type="Sprite2D" parent="Map"]
+position = Vector2(77.6119, -280.686)
+scale = Vector2(0.0466565, 0.0466565)
+texture = ExtResource("11_r5sb0")
+
+[node name="Node" type="Node" parent="Map"]
+script = ExtResource("9_o2pbp")
+
+[node name="Deck" type="Sprite2D" parent="Map"]
+position = Vector2(-372.75, -195.672)
+scale = Vector2(0.702593, 0.702593)
+texture = ExtResource("1_p5sm8")
+script = ExtResource("4_sskqe")
+
+[node name="Phasing" type="Label" parent="Map"]
+offset_left = -440.199
+offset_top = 21.4291
+offset_right = -317.199
+offset_bottom = 112.429
+text = "Фаза:"
+label_settings = ExtResource("13_ylyrt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Info" type="Label" parent="Map"]
+offset_left = -477.436
+offset_top = 171.081
+offset_right = -258.436
+offset_bottom = 283.081
+label_settings = ExtResource("13_ylyrt")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Confirmation" type="Button" parent="Map"]
+offset_left = -484.0
+offset_top = -71.0
+offset_right = -346.0
+offset_bottom = 36.0
+text = "начать игру"
+
+[node name="Reminder" type="VBoxContainer" parent="Map"]
+offset_left = 629.147
+offset_top = -328.462
+offset_right = 729.147
+offset_bottom = 340.538
+
+[node name="SOVd6" type="Sprite2D" parent="Map"]
+modulate = Color(1, 0.21268, 0.159696, 1)
+position = Vector2(-308.111, -276.47)
+scale = Vector2(0.702593, 0.702593)
+texture = ExtResource("14_vfij2")
+
+[node name="USAd6" type="Sprite2D" parent="Map"]
+self_modulate = Color(0.405178, 0.592296, 1, 1)
+position = Vector2(-438.794, -274.362)
+scale = Vector2(0.702593, 0.702593)
+texture = ExtResource("14_vfij2")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+offset_left = 1111.0
+offset_top = 32.0
+offset_right = 1557.0
+offset_bottom = 90.0
+mouse_filter = 2
+script = ExtResource("13_ucays")
+
+[node name="VBox_l" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBox_r" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CardOptions" type="VBoxContainer" parent="."]
+offset_left = 626.0
+offset_top = 14.0
+offset_right = 754.0
+offset_bottom = 944.0
+mouse_filter = 2
+alignment = 1
+
+[node name="PlayUSSR" type="Sprite2D" parent="."]
+position = Vector2(260, 286)
+scale = Vector2(0.207031, 0.207031)
+texture = ExtResource("7_hyjwb")
+
+[node name="PlayUSSR" type="Button" parent="PlayUSSR"]
+offset_left = -227.0
+offset_top = -251.0
+offset_right = 246.0
+offset_bottom = 232.0
+
+[node name="PlayUSA" type="Sprite2D" parent="."]
+position = Vector2(87, 288)
+scale = Vector2(0.207031, 0.207031)
+texture = ExtResource("6_k5k8i")
+
+[node name="PlayUSA" type="Button" parent="PlayUSA"]
+offset_left = -227.0
+offset_top = -237.0
+offset_right = 256.0
+offset_bottom = 237.0
+
+[node name="DiscardScroll" type="ScrollContainer" parent="."]
+offset_left = 1577.0
+offset_top = 532.0
+offset_right = 1744.0
+offset_bottom = 957.0
+horizontal_scroll_mode = 0
+
+[node name="Discard" type="VBoxContainer" parent="DiscardScroll"]
+layout_mode = 2
+
+[connection signal="pressed" from="Map/Confirmation" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PlayUSSR/PlayUSSR" to="." method="_on_play_ussr_pressed"]
+[connection signal="pressed" from="PlayUSA/PlayUSA" to="." method="_on_play_usa_pressed"]
