@@ -327,17 +327,19 @@ func play_a_card(id = -1):
 	realignment_.realignment.connect(realign)
 	$CardOptions.add_child(realignment_)
 	
-	var space_ = CardOption.instantiate()
-	if player_country == Phase.USA:
-		if space_usa < 2: space_.min_ops = 2
-		else: space_.min_ops = 3
-	else:
-		if space_ussr < 2: space_.min_ops = 2
-		else: space_.min_ops = 3
+	if not space_attempt:
+		var space_ = CardOption.instantiate()
+		if player_country == Phase.USA:
+			if space_usa < 2: space_.min_ops = 2
+			else: space_.min_ops = 3
+		else:
+			if space_ussr < 2: space_.min_ops = 2
+			else: space_.min_ops = 3
 	
-	space_.apply_ui(option_mode.SPACE_RACE)
-	space_.space.connect(space_race)
-	$CardOptions.add_child(space_)
+		space_.apply_ui(option_mode.SPACE_RACE)
+		space_.space.connect(space_race)
+		space_.space.connect(func() : space_attempt = true)
+		$CardOptions.add_child(space_)
 	
 	if id == -1:
 		var event_ = CardOption.instantiate()
@@ -353,6 +355,7 @@ signal choose_a_country
 signal choose_with_filter
 var eligible = Array()
 var ops_left = 0
+var space_attempt = false
 
 func clear_card_options():
 	for child in $CardOptions.get_children():
@@ -610,6 +613,8 @@ func event(id : int):
 	clear_card_options()
 	redirect_event(chosen, player_country)
 
+var remove_one_inf_in_headline = false
+
 func space_race(id : int):
 	var chosen : Card = Card.find_in_deck(Card.card_manifest, id)
 	hand.erase(chosen)
@@ -619,30 +624,45 @@ func space_race(id : int):
 		$Map.roll_d6.rpc(0)
 		if space_usa == 0:
 			if $Map.last_roll < 5:
-				pass # remove 1 influence in next HL
+				#TEST # remove 1 influence in next HL
+				if not first_space: remove_one_inf_in_headline = true
+				move_space_race.rpc(0) # 2/1 VP
 		elif space_usa == 1:
 			if $Map.last_roll < 4:
-				if collected_3vp: move_VP.rpc(1)
+				if collected_2vp: move_VP.rpc(1)
 				else: move_VP.rpc(2)
 				move_space_race.rpc(0) # 2/1 VP
 		else:
 			if $Map.last_roll < 5:
-				pass # draw card, 3 vp
+				if not collected_3vp:
+					#TODO draw a card
+					move_VP.rpc(3)
+				move_space_race.rpc(0) # 2/1 VP
 	else:
 		$Map.roll_d6.rpc(1)
 		if space_ussr == 0:
 			if $Map.last_roll < 5:
-				pass # remove 1 influence in next HL
+				#TEST # remove 1 influence in next HL
+				if not first_space: remove_one_inf_in_headline = true
+				move_space_race.rpc(1) 
 		elif space_ussr == 1:
 			if $Map.last_roll < 4:
-				if collected_3vp: move_VP.rpc(-1)
+				if collected_2vp: move_VP.rpc(-1)
 				else: move_VP.rpc(-2)
 				move_space_race.rpc(1)
 		else:
 			if $Map.last_roll < 5:
-				pass # draw card, 3 vp
+				# draw card, 3 vp
+				if not collected_3vp:
+					#TODO draw a card
+					move_VP.rpc(-3)
+				move_space_race.rpc(1)
+	clear_card_options()
+	
 
 # SPACE RACE REWARDS
+var first_space = false
+var collected_2vp = false
 var collected_3vp = false
 	
 
@@ -690,12 +710,12 @@ func move_space_race(bloc_id : int):
 	if bloc_id == 0:
 		space_usa += 1
 		if space_usa == 2:
-			collected_3vp = true
+			collected_2vp = true
 		$Map/space_USA.position.y -= 60
 	elif bloc_id == 1:
 		space_ussr += 1
 		if space_usa == 2:
-			collected_3vp = true
+			collected_2vp = true
 		$Map/space_USSR.position.y -= 60
 
 @rpc("any_peer", "call_local")
