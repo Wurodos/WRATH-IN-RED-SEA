@@ -337,8 +337,9 @@ func play_a_card(id = -1):
 			else: space_.min_ops = 3
 	
 		space_.apply_ui(option_mode.SPACE_RACE)
+		space_.space.connect(func(card_id) : space_attempt = true)
 		space_.space.connect(space_race)
-		space_.space.connect(func() : space_attempt = true)
+		
 		$CardOptions.add_child(space_)
 	
 	if id == -1:
@@ -658,6 +659,7 @@ func space_race(id : int):
 					move_VP.rpc(-3)
 				move_space_race.rpc(1)
 	clear_card_options()
+	$Map/Confirmation.disabled = false
 	
 
 # SPACE RACE REWARDS
